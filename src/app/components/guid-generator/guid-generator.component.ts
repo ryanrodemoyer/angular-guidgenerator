@@ -25,6 +25,10 @@ export class GuidGeneratorComponent implements OnInit {
 
   params: any;
 
+  httpInFlight: boolean = false;
+
+  isDebugMode: boolean = false;
+
   constructor(
     private uuidService: UuidService
     , private route: ActivatedRoute
@@ -50,6 +54,8 @@ export class GuidGeneratorComponent implements OnInit {
     }
 
   getUuids() {
+    this.httpInFlight = true;
+
     this.uuidService.getUuids(this.opts).subscribe(resp => {
       this.uuidResponse = {...resp.body}
 
@@ -60,6 +66,8 @@ export class GuidGeneratorComponent implements OnInit {
       }
 
       this.uuidResults = result;
+
+      this.httpInFlight = false;
     });
   }
 }

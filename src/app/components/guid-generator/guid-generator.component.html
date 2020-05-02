@@ -15,20 +15,26 @@
 </div>
 
 <div class="pt" style="clear: both;">
-  <button type="submit" (click)="getUuids()">Generate some GUIDs!</button>
+  <button type="submit" (click)="getUuids()" [disabled]="httpInFlight">Generate some GUIDs!</button>
 </div>
 
-<div>
-<pre>
-{{ opts | json}}
-  </pre>
+<div class="pt">
+  <input type="checkbox" [(ngModel)]="isDebugMode" /> <small>Is Debug Mode?</small>
+</div>
+
+<div *ngIf="isDebugMode">
+  <div>
+    <h4 style="font-family: Courier New;">this.opts</h4>
+    <p>These values are bound to the checkboxes above that control how the UUID's are generated.</p>
+    <pre>{{ opts | json}}</pre>
   </div>
 
-<div>
-<pre>
-{{ params | json}}
-  </pre>
+  <div>    
+    <h4 style="font-family: Courier New;">this.params</h4>
+    <p>Shows the parameters available from the URL.</p>
+    <pre>{{ params | json}}</pre>
   </div>
+</div>
 
 <div id="results" class="pt">
   <small>Results:</small>
