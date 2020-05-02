@@ -1,0 +1,40 @@
+<div>
+	<p>
+		How many GUID's do you want (1-2000): <input [(ngModel)]="opts.amount" type="number" id="howMany" name="howMany" min="1" max="2000"/>
+</p>
+
+<div>
+  <div class="option"><input type="checkbox" [(ngModel)]="opts.isUppercase" /> Uppcase </div>
+  <div class="option ml"><input type="checkbox" [(ngModel)]="opts.hasBraces" /> {{ '{}' }} Braces </div>
+  <div class="option ml"><input type="checkbox" [(ngModel)]="opts.hasHyphens" /> Hypens</div>
+</div>
+<div class="pt" style="clear:both;">
+  <div class="option"><input type="checkbox" [(ngModel)]="opts.b64Encode" /> Base64 encode</div>
+  <div class="option ml"><input type="checkbox"/> RFC 7515</div>
+  <div class="option ml"><input type="checkbox" [(ngModel)]="opts.urlEncode" /> URL encode</div>
+</div>
+
+<div class="pt" style="clear: both;">
+  <button type="submit" (click)="getUuids()">Generate some GUIDs!</button>
+</div>
+
+<div>
+<pre>
+{{ opts | json}}
+  </pre>
+  </div>
+
+<div>
+<pre>
+{{ params | json}}
+  </pre>
+  </div>
+
+<div id="results" class="pt">
+  <small>Results:</small>
+  <textarea class="results" [(ngModel)]="uuidResults" rows="10" ></textarea>
+  <small>Use these GUIDs at your own risk! No guarantee of their uniqueness or suitability is given or implied.</small>
+</div>
+
+<guid-info></guid-info>
+</div>

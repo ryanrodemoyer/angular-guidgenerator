@@ -23,3 +23,15 @@
 .results {
   width: 97%;
 }
+
+p {
+  font-family: Lato;
+}
+
+.ml {
+  margin-left: 20px;
+}
+
+.pt {
+  padding-top: 10px;
+}
