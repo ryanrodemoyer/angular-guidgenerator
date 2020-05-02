@@ -1,0 +1,72 @@
+<!-- <hello name="{{ name }}"></hello> -->
+<div class="container">
+	<h1>Online Guid Generator</h1>
+
+	<p>
+		How many GUID's do you want (1-2000): <input [(ngModel)]="opts.amount" type="number" id="howMany" name="howMany" min="1" max="2000"/>
+</p>
+
+<div>
+  <div class="option"><input type="checkbox" [(ngModel)]="opts.isUppercase" /> Uppcase </div>
+  <div class="option ml"><input type="checkbox" [(ngModel)]="opts.hasBraces" /> {{ '{}' }} Braces </div>
+  <div class="option ml"><input type="checkbox" [(ngModel)]="opts.hasHyphens" /> Hypens</div>
+</div>
+<div class="pt" style="clear:both;">
+  <div class="option"><input type="checkbox" [(ngModel)]="opts.b64Encode" /> Base64 encode</div>
+  <div class="option ml"><input type="checkbox"/> RFC 7515</div>
+  <div class="option ml"><input type="checkbox" [(ngModel)]="opts.urlEncode" /> URL encode</div>
+</div>
+
+<div class="pt" style="clear: both;">
+  <button type="submit" (click)="getUuids()">Generate some GUIDs!</button>
+</div>
+
+<div>
+<pre>
+{{ opts | json}}
+  </pre>
+  </div>
+
+<div>
+<pre>
+{{ params | json}}
+  </pre>
+  </div>
+
+<div id="results" class="pt">
+  <small>Results:</small>
+  <textarea class="results" [(ngModel)]="uuidResults" rows="10" ></textarea>
+  <small>Use these GUIDs at your own risk! No guarantee of their uniqueness or suitability is given or implied.</small>
+</div>
+
+<h2>What is a GUID?</h2>
+<p>GUID (or UUID) is an acronym for 'Globally Unique Identifier' (or 'Universally Unique
+  Identifier'). It
+  is a
+  128-bit integer number used to identify resources. The term GUID is generally used by
+  developers working
+  with
+  Microsoft technologies, while UUID is used everywhere else.</p>
+
+<h2>How unique is a GUID?</h2>
+<p>128-bits is big enough and the generation algorithm is unique enough that if
+  1,000,000,000 GUIDs per
+  second were
+  generated for 1 year the probability of a duplicate would be only 50%. Or if every human
+  on Earth
+  generated
+  600,000,000 GUIDs there would only be a 50% probability of a duplicate.</p>
+
+<h2>How are GUIDs used?</h2>
+<p>GUIDs are used in enterprise software development in C#, Java, and C++ as database keys,
+  component
+  identifiers,
+  or just about anywhere else a truly unique identifier is required. GUIDs are also used
+  to identify all
+  interfaces and objects in COM programming.
+
+  <h2>More Information About GUIDs</h2>
+  <p>Globally Unique Identifier - Wikipedia, the free encyclopedia
+    GUID Structure - Microsoft.com
+    RFC 4122</p>
+</div>

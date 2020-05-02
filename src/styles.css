@@ -1,0 +1,25 @@
+/* Add application styles & imports to this file! */
+
+.container {
+  margin-left: 50px;
+  width: 600px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .container {
+    margin-left: 5px;
+    width: 100%;
+  }
+}
+
+/* @media only screen and (max-width: 600px) {
+  .container {
+  width: 100%;
+  }
+}
+ */
+
+.results {
+  width: 97%;
+}

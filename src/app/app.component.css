@@ -1,0 +1,15 @@
+p {
+  font-family: Lato;
+}
+
+.option {
+  float: left;
+}
+
+.ml {
+  margin-left: 20px;
+}
+
+.pt {
+  padding-top: 10px;
+}
