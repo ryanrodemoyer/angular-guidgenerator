@@ -1,7 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
-import { UuidService, UuidResponse, UuidOptions } from "../../services/uuid.service";
+import { finalize } from "rxjs/operators";
+
+import {
+  UuidService,
+  UuidResponse,
+  UuidOptions
+} from "../../services/uuid.service";
 
 @Component({
   selector: "guid-generator",
@@ -17,12 +23,14 @@ export class GuidGeneratorComponent implements OnInit {
     hasBraces: false,
     hasHyphens: false,
     b64Encode: false,
+    rfc7515: false,
     urlEncode: false
   }
 
   uuidResults: string;
   uuidResponse: UuidResponse;
-
+  errorMessageResponse: any;
+  
   params: any;
 
   httpInFlight: boolean = false;
@@ -37,7 +45,7 @@ export class GuidGeneratorComponent implements OnInit {
     ngOnInit() {
       this.route.queryParams.subscribe(params => {
         this.params = params;
-        const names = ['amount', 'isUppercase', 'hasBraces', 'b64Encode', 'urlEncode'];
+        const names = ['amount', 'isUppercase', 'hasBraces', 'b64Encode', 'rfc7515', 'urlEncode'];
 
         for (let name of names) {
           const value = params[name];
@@ -56,18 +64,27 @@ export class GuidGeneratorComponent implements OnInit {
   getUuids() {
     this.httpInFlight = true;
 
-    this.uuidService.getUuids(this.opts).subscribe(resp => {
-      this.uuidResponse = {...resp.body}
+    // https://github.com/angular/angular/issues/7865#issuecomment-409105458
+    // using the `finalize` operator from rxjs to control when the http request is complete
+    this.uuidService
+      .getUuids(this.opts)
+      .pipe(finalize(() => (this.httpInFlight = false)))
+      .subscribe(
+        resp => {
+          this.uuidResponse = { ...resp.body };
 
-      let result = '';
-      for (let uuid of this.uuidResponse.uuids) {
-        console.log(uuid);
-        result += `${uuid}\n`
-      }
+          let result = "";
+          for (let uuid of this.uuidResponse.uuids) {
+            result += `${uuid}\n`;
+          }
 
-      this.uuidResults = result;
+          this.uuidResults = result;
+        },
+        err => {
+          this.errorMessageResponse = `${err.message}\n${err.error.message}`;
 
-      this.httpInFlight = false;
-    });
+          // this.errorMessageResponse = JSON.stringify(error, null, 2);
+        }
+      );
   }
 }

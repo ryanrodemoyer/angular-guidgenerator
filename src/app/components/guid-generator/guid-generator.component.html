@@ -9,8 +9,8 @@
   <div class="option ml"><input type="checkbox" [(ngModel)]="opts.hasHyphens" /> Hypens</div>
 </div>
 <div class="pt" style="clear:both;">
-  <div class="option"><input type="checkbox" [(ngModel)]="opts.b64Encode" /> Base64 encode</div>
-  <div class="option ml"><input type="checkbox"/> RFC 7515</div>
+  <div class="option"><input type="checkbox" [(ngModel)]="opts.b64Encode" />&nbsp;<a href="https://en.wikipedia.org/wiki/Base64" target="_blank">Base64 encode</a></div>
+  <div class="option ml"><input type="checkbox" [(ngModel)]="opts.rfc7515" />&nbsp;<a href="https://tools.ietf.org/html/rfc7515#appendix-C" target="_blank">RFC 7515</a></div>
   <div class="option ml"><input type="checkbox" [(ngModel)]="opts.urlEncode" /> URL encode</div>
 </div>
 
@@ -34,6 +34,10 @@
     <p>Shows the parameters available from the URL.</p>
     <pre>{{ params | json}}</pre>
   </div>
+</div>
+
+<div id="error" class="pt">
+  <p>{{errorMessageResponse}}</p>
 </div>
 
 <div id="results" class="pt">

@@ -25,7 +25,7 @@
 }
 
 p {
-  font-family: Lato;
+  /* font-family: Lato; */
 }
 
 .ml {
@@ -34,4 +34,8 @@ p {
 
 .pt {
   padding-top: 10px;
+}
+
+body {
+  font-family: Georgia, 'Times New Roman', Times, serif
 }

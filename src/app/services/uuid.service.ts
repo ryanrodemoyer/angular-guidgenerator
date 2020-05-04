@@ -12,7 +12,7 @@ export class UuidService {
 
   getUuids(options: UuidOptions): Observable<HttpResponse<UuidResponse>> {
     return this.http.get<UuidResponse>(
-      `https://z274p.sse.codesandbox.io/guid?num=${options.amount}&isUppercase=${options.isUppercase}&hasBraces=${options.hasBraces}&hasHyphens=${options.hasHyphens}&b64Encode=${options.b64Encode}&urlEncode=${options.urlEncode}`, {observe: 'response'}
+      `https://z274p.sse.codesandbox.io/guid?amount=${options.amount}&isUppercase=${options.isUppercase}&hasBraces=${options.hasBraces}&hasHyphens=${options.hasHyphens}&b64Encode=${options.b64Encode}&rfc75157=${options.rfc7515}&urlEncode=${options.urlEncode}`, {observe: 'response'}
       );
   }
 }
@@ -27,5 +27,6 @@ export interface UiidOptions {
   hasBraces: boolean;
   hasHyphens: boolean;
   b64Encode: boolean;
+  rfc7515: boolean;
   urlEncode: boolean;
 }
